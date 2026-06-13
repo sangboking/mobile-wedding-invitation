@@ -14,13 +14,19 @@ function MultiLine({ text }: { text: string }) {
   );
 }
 
+// 혼주 정보 타입 (리터럴 좁힘 방지를 위해 string/boolean으로 명시)
+type Person = {
+  name: string;
+  father: string;
+  mother: string;
+  order: string;
+  fatherDeceased?: boolean;
+  motherDeceased?: boolean;
+};
+
 // 혼주 한 줄: "[아이콘칸] 아버지 · 어머니 의 {관계} {이름}"
 // 맨 앞 고정폭 칸 덕분에 신랑/신부 줄의 아버지 성함 시작 위치가 정렬됩니다.
-function ParentLine({
-  person,
-}: {
-  person: typeof wedding.groom | typeof wedding.bride;
-}) {
+function ParentLine({ person }: { person: Person }) {
   const hasParents = person.father || person.mother;
   return (
     <p className="flex items-center text-sm text-ink">
