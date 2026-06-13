@@ -162,7 +162,7 @@ export default function Guestbook() {
                 onChange={(e) => setAdminPw(e.target.value)}
                 type="password"
                 placeholder="관리자 비밀번호"
-                className="flex-1 rounded-md border border-ink/15 bg-white px-3 py-1.5 text-sm outline-none focus:border-point"
+                className="min-w-0 flex-1 rounded-md border border-ink/15 bg-white px-3 py-1.5 text-sm outline-none focus:border-point"
               />
             </div>
           )}
