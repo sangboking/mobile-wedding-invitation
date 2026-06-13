@@ -106,7 +106,7 @@ export const wedding = {
 
   // 메타데이터 / 카카오 공유용
   meta: {
-    siteUrl: "https://mobile-wedding-invitation-qfcj.vercel.app", // 배포 도메인
+    siteUrl: "https://sanghoon-minjae.vercel.app", // 배포 도메인
     ogImage: "/og-image.jpg", // public/og-image.jpg (1200x630 권장)
   },
 } as const;
