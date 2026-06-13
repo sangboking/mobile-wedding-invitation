@@ -90,7 +90,7 @@ export const wedding = {
     groom: {
       title: "신랑측 계좌번호",
       list: [
-        { role: "신랑", name: "박상훈", bank: "", number: "", kakaopay: "" },
+        { role: "신랑", name: "박상훈", bank: "IBK기업은행", number: "130-081403-01-019", kakaopay: "" },
         { role: "아버지", name: "박흥규", bank: "", number: "", kakaopay: "" },
         { role: "어머니", name: "이혜자", bank: "", number: "", kakaopay: "" },
       ],

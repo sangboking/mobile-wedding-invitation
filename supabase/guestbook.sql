@@ -60,3 +60,41 @@ begin
 end; $$;
 
 grant execute on function public.delete_guestbook(uuid, text) to anon, authenticated;
+
+-- ───────────────────────────────────────────────
+-- 6) 관리자 삭제 (B방식)
+-- ───────────────────────────────────────────────
+
+-- 6-1) 관리자 비밀번호 보관 테이블 (anon 접근 차단)
+create table if not exists public.app_config (
+  key   text primary key,
+  value text not null
+);
+alter table public.app_config enable row level security;  -- 정책 없음 → 외부 직접 접근 불가
+
+-- 6-2) 관리자 비밀번호 설정/변경 (★ '여기에_관리자비번' 을 원하는 값으로 바꿔 실행)
+insert into public.app_config(key, value)
+values ('admin_pw', crypt('653659', gen_salt('bf')))
+on conflict (key) do update set value = excluded.value;
+
+-- 6-3) 관리자 삭제 RPC (관리자 비번 일치 시 어떤 글이든 삭제)
+create or replace function public.admin_delete_guestbook(
+  p_id uuid, p_admin_pw text
+) returns boolean
+language plpgsql security definer set search_path = public, extensions as $$
+declare cnt int;
+begin
+  -- 관리자 비번 검증
+  if not exists (
+    select 1 from public.app_config
+    where key = 'admin_pw' and value = crypt(p_admin_pw, value)
+  ) then
+    return false;
+  end if;
+
+  delete from public.guestbook where id = p_id;
+  get diagnostics cnt = row_count;
+  return cnt > 0;
+end; $$;
+
+grant execute on function public.admin_delete_guestbook(uuid, text) to anon, authenticated;

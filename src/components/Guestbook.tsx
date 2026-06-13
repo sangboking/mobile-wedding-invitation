@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { containsBadWord } from "@/lib/badwords";
 
 type Entry = {
   id: string;
@@ -34,6 +35,15 @@ export default function Guestbook() {
   const PAGE = 5;
   const [visible, setVisible] = useState(PAGE);
 
+  // 관리자 모드 (?admin 으로 접속 시)
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPw, setAdminPw] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setIsAdmin(params.has("admin"));
+  }, []);
+
   const load = useCallback(async () => {
     if (!supabase) return;
     setLoading(true);
@@ -57,6 +67,10 @@ export default function Guestbook() {
     }
     if (password.length !== 4) {
       alert("삭제용 비밀번호 4자리를 입력해 주세요.");
+      return;
+    }
+    if (containsBadWord(name) || containsBadWord(message)) {
+      alert("부적절한 표현이 포함되어 있어요. 따뜻한 말로 남겨주세요 🙂");
       return;
     }
     setSubmitting(true);
@@ -99,6 +113,28 @@ export default function Guestbook() {
     }
   };
 
+  const adminDelete = async (id: string) => {
+    if (!supabase) return;
+    if (!adminPw) {
+      alert("관리자 비밀번호를 입력해 주세요.");
+      return;
+    }
+    if (!confirm("이 글을 삭제할까요?")) return;
+    const { data, error } = await supabase.rpc("admin_delete_guestbook", {
+      p_id: id,
+      p_admin_pw: adminPw,
+    });
+    if (error) {
+      alert("삭제 중 오류가 발생했어요.");
+      return;
+    }
+    if (data === true) {
+      load();
+    } else {
+      alert("관리자 비밀번호가 일치하지 않습니다.");
+    }
+  };
+
   return (
     <section className="flex flex-col gap-6 px-6 py-16">
       <div className="flex flex-col items-center gap-2 text-center">
@@ -115,6 +151,22 @@ export default function Guestbook() {
         </p>
       ) : (
         <>
+          {/* 관리자 모드 바 (?admin 접속 시에만) */}
+          {isAdmin && (
+            <div className="flex items-center gap-2 rounded-xl border border-point/40 bg-point/5 p-3">
+              <span className="shrink-0 text-xs font-medium text-point">
+                관리자
+              </span>
+              <input
+                value={adminPw}
+                onChange={(e) => setAdminPw(e.target.value)}
+                type="password"
+                placeholder="관리자 비밀번호"
+                className="flex-1 rounded-md border border-ink/15 bg-white px-3 py-1.5 text-sm outline-none focus:border-point"
+              />
+            </div>
+          )}
+
           {/* 작성 폼 */}
           <div className="flex flex-col gap-2 rounded-xl border border-ink/10 bg-white/60 p-4">
             <div className="flex gap-2">
@@ -208,15 +260,25 @@ export default function Guestbook() {
                       </button>
                     </div>
                   ) : (
-                    <button
-                      onClick={() => {
-                        setDeletingId(e.id);
-                        setDeletePw("");
-                      }}
-                      className="mt-2 text-xs text-ink/40 underline"
-                    >
-                      삭제
-                    </button>
+                    <div className="mt-2 flex gap-3">
+                      <button
+                        onClick={() => {
+                          setDeletingId(e.id);
+                          setDeletePw("");
+                        }}
+                        className="text-xs text-ink/40 underline"
+                      >
+                        삭제
+                      </button>
+                      {isAdmin && (
+                        <button
+                          onClick={() => adminDelete(e.id)}
+                          className="text-xs text-rose-500 underline"
+                        >
+                          관리자 삭제
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
               ))
