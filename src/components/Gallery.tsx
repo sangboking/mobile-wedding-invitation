@@ -36,11 +36,30 @@ export default function Gallery() {
       else if (e.key === "ArrowRight") next();
     };
     window.addEventListener("keydown", onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    // 배경 스크롤 잠금 (position:fixed 방식 — iOS·데스크탑 모두 확실)
+    const scrollY = window.scrollY;
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
+    // 모바일: 터치 스크롤(터치무브)도 차단 (passive:false 라야 preventDefault 동작)
+    const preventTouch = (e: TouchEvent) => e.preventDefault();
+    document.addEventListener("touchmove", preventTouch, { passive: false });
+
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("touchmove", preventTouch);
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      // 잠그기 전 스크롤 위치 복원
+      window.scrollTo(0, scrollY);
     };
   }, [isOpen, close, prev, next]);
 
@@ -82,8 +101,10 @@ export default function Gallery() {
       {/* 라이트박스 모달 */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90"
           onClick={close}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
           {/* 닫기 */}
           <button
@@ -104,14 +125,13 @@ export default function Gallery() {
             </svg>
           </button>
 
-          {/* 이미지 영역 (배경 클릭 닫힘 방지 위해 stopPropagation) */}
-          <div
-            className="relative flex h-full w-full items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            <div className="relative h-[90vh] w-full">
+          {/* 이미지 영역. 바깥(어두운 부분) 클릭 시 닫히고, 사진/버튼 클릭은 유지 */}
+          <div className="relative flex h-full w-full items-center justify-center">
+            {/* 사진 자체만 클릭 전파 차단 (사진 클릭으론 안 닫힘) */}
+            <div
+              className="relative h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Image
                 src={photos[openIndex]}
                 alt={`갤러리 사진 ${openIndex + 1}`}
@@ -125,7 +145,10 @@ export default function Gallery() {
             {/* 좌/우 버튼 (첫 사진엔 좌측, 마지막 사진엔 우측 숨김) */}
             {openIndex > 0 && (
               <button
-                onClick={prev}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prev();
+                }}
                 className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white"
                 aria-label="이전 사진"
               >
@@ -144,7 +167,10 @@ export default function Gallery() {
             )}
             {openIndex < photos.length - 1 && (
               <button
-                onClick={next}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  next();
+                }}
                 className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white"
                 aria-label="다음 사진"
               >

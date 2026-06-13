@@ -5,6 +5,7 @@ import Calendar from "@/components/Calendar";
 import Gallery from "@/components/Gallery";
 import Location from "@/components/Location";
 import Account from "@/components/Account";
+import Guestbook from "@/components/Guestbook";
 import Share from "@/components/Share";
 import Reveal from "@/components/Reveal";
 
@@ -31,6 +32,9 @@ export default function Home() {
       </Reveal>
       <Reveal>
         <Account />
+      </Reveal>
+      <Reveal>
+        <Guestbook />
       </Reveal>
       <Reveal>
         <Share />

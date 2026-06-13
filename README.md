@@ -67,6 +67,22 @@ next.config.mjs    # Next 설정
     - 발급: [NCP 콘솔](https://console.ncloud.com) → AI·NAVER API → Maps → Application 등록
     - **배포 도메인을 Application의 Web 서비스 URL에 등록**해야 지도가 뜹니다.
 
+## 방명록 (Supabase)
+
+1. [supabase.com](https://supabase.com) 에서 프로젝트 생성 (무료)
+2. 대시보드 → **SQL Editor** → `supabase/guestbook.sql` 내용 붙여넣고 **RUN**
+   - 테이블 + 공개 뷰 + 작성/삭제 RPC가 생성됩니다. 비밀번호는 bcrypt 해시로 저장됩니다.
+3. 대시보드 → **Settings → API** 에서 값 복사 → `.env.local` 에 추가:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+   ```
+4. **Vercel 배포 시** 같은 두 변수를 Vercel → Settings → Environment Variables 에도 추가
+5. env가 없으면 방명록은 "설정 필요" 안내로 표시됩니다(나머지 페이지는 정상).
+
+> 보안: 클라이언트는 `guestbook_public` 뷰(=password 제외)만 조회하고,
+> 작성/삭제는 RPC 함수로만 가능합니다. anon 키로도 password 컬럼은 읽을 수 없습니다.
+
 ## Vercel 배포
 
 1. 이 폴더를 GitHub 저장소로 push

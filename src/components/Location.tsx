@@ -28,9 +28,9 @@ const navLinks = {
 };
 
 const NAV_BUTTONS = [
-  { key: "tmap", label: "티맵", href: navLinks.tmap, color: "#0064FF" },
-  { key: "kakao", label: "카카오내비", href: navLinks.kakao, color: "#FEE500" },
-  { key: "naver", label: "네이버지도", href: navLinks.naver, color: "#03C75A" },
+  { key: "tmap", label: "티맵", href: navLinks.tmap, icon: "/tmap.png" },
+  { key: "kakao", label: "카카오내비", href: navLinks.kakao, icon: "/kakao.png" },
+  { key: "naver", label: "네이버지도", href: navLinks.naver, icon: "/naver.png" },
 ] as const;
 
 export default function Location() {
@@ -76,12 +76,9 @@ export default function Location() {
             href={b.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 rounded-lg border border-ink/10 bg-white/70 py-3 text-sm text-ink shadow-sm active:scale-95"
+            className="flex items-center justify-center gap-1 rounded-lg border border-ink/10 bg-white/70 py-2.5 text-xs text-ink shadow-sm active:scale-95"
           >
-            <span
-              className="h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: b.color }}
-            />
+            <img src={b.icon} alt={b.label} className="h-4 w-4 rounded object-contain" />
             {b.label}
           </a>
         ))}
