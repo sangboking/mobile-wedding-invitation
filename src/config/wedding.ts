@@ -106,7 +106,7 @@ export const wedding = {
 
   // 메타데이터 / 카카오 공유용
   meta: {
-    siteUrl: "https://your-domain.vercel.app", // 배포 후 실제 도메인으로 변경
+    siteUrl: "https://mobile-wedding-invitation-qfcj.vercel.app", // 배포 도메인
     ogImage: "/og-image.jpg", // public/og-image.jpg (1200x630 권장)
   },
 } as const;
