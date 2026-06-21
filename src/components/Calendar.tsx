@@ -58,24 +58,27 @@ export default function Calendar() {
                     key={di}
                     className="flex h-9 items-center justify-center text-sm"
                   >
-                    {day && (
-                      <span
-                        className={
-                          isWedding
-                            ? "relative flex h-8 w-8 items-center justify-center rounded-full bg-point font-medium text-white"
-                            : isSunday
-                              ? "text-rose-400"
-                              : "text-ink/80"
-                        }
-                      >
-                        {day}
-                        {isWedding && (
-                          <span className="absolute -right-1 -top-1 text-xs">
-                            ♥
+                    {day &&
+                      (isWedding ? (
+                        <span className="relative flex h-8 w-8 items-center justify-center">
+                          {/* 하트 배경 */}
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="absolute inset-0 h-full w-full -translate-y-[1.5px] scale-[1.45] text-point"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M12 21s-7.4-4.7-7.4-10.2C4.6 7.7 6.7 6 9.1 6c1.6 0 2.5 1 2.9 1.8C12.4 7 13.3 6 14.9 6c2.4 0 4.5 1.7 4.5 4.8C19.4 16.3 12 21 12 21z" />
+                          </svg>
+                          <span className="relative font-medium text-white">
+                            {day}
                           </span>
-                        )}
-                      </span>
-                    )}
+                        </span>
+                      ) : (
+                        <span className={isSunday ? "text-rose-400" : "text-ink/80"}>
+                          {day}
+                        </span>
+                      ))}
                   </div>
                 );
               })}

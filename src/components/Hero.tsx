@@ -5,9 +5,9 @@ export default function Hero() {
   const { groom, bride, dateText, timeText, venue, mainPhoto } = wedding;
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col">
-      {/* 대표 사진 (가로 꽉 차게 풀블리드) */}
-      <div className="relative w-full flex-1 overflow-hidden">
+    <section className="relative flex flex-col">
+      {/* 대표 사진 (가로 꽉 차게, 4:5 고정 비율) */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden">
         <Image
           src={mainPhoto}
           alt={`${groom.name} ${bride.name} 메인 사진`}

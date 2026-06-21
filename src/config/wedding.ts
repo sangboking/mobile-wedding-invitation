@@ -82,6 +82,9 @@ export const wedding = {
     "/img_7.jpg",
     "/img_8.jpg",
     "/img_9.jpg",
+    "/img_10.jpg",
+    "/img_11.jpg",
+    "/img_12.jpg",
   ],
 
   // 마음 전하실 곳 (계좌)
@@ -98,11 +101,18 @@ export const wedding = {
     bride: {
       title: "신부측 계좌번호",
       list: [
-        { role: "신부", name: "김민재", bank: "", number: "", kakaopay: "" },
+        { role: "신부", name: "김민재", bank: "신한은행", number: "110-534-937652", kakaopay: "" },
         { role: "어머니", name: "박현아", bank: "", number: "", kakaopay: "" },
       ],
     },
   },
+
+  // 자주 묻는 질문
+  faq: [
+    { q: "어떻게 만났나요?", a: "가족 지인 소개로 만났어요." },
+    { q: "신혼 여행은 어디로 며칠간 가나요?", a: "이탈리아로 12박 13일 갑니다." },
+    { q: "신혼집은 어디인가요?", a: "안양에서 시작해요." },
+  ],
 
   // 메타데이터 / 카카오 공유용
   meta: {

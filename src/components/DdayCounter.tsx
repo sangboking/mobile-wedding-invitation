@@ -40,11 +40,8 @@ export default function DdayCounter() {
     return () => clearInterval(id);
   }, [target]);
 
-  // D-day 숫자 (예: D-84)
-  const dday =
-    remaining && !remaining.isPast
-      ? remaining.days + (remaining.hours || remaining.minutes || remaining.seconds ? 1 : 0)
-      : 0;
+  // D-day 숫자 — 위 DAYS 칸과 동일하게 잔여 일수 그대로 사용
+  const dday = remaining && !remaining.isPast ? remaining.days : 0;
 
   const cells: { label: string; value: number }[] = remaining
     ? [
