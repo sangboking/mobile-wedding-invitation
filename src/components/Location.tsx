@@ -92,7 +92,7 @@ export default function Location() {
               <span className="mt-0.5 inline-flex h-fit w-16 shrink-0 justify-center rounded-md bg-ink px-2 py-1 text-xs text-white">
                 {t.label}
               </span>
-              <p className="text-[13px] leading-relaxed text-ink/80">
+              <p className="break-keep text-pretty text-[13px] leading-relaxed text-ink/80">
                 {t.desc.split("\n").map((line, i) => (
                   <span key={i} className="block">
                     {line}
