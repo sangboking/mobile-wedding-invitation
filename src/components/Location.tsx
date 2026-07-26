@@ -49,7 +49,7 @@ export default function Location() {
   return (
     <section className="flex flex-col gap-6 px-6 py-16">
       <div className="flex flex-col items-center gap-2">
-        <p className="text-xs tracking-[0.35em] text-point">LOCATION</p>
+        <p className="font-bold text-xs tracking-[0.35em] text-point">LOCATION</p>
         <h2 className="text-lg font-medium text-ink">{venue.name}</h2>
         {venue.hall && <p className="text-sm text-ink/70">{venue.hall}</p>}
       </div>

@@ -21,8 +21,8 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/35 to-transparent" />
 
         {/* 사진 위 오버레이 문구 */}
-        <p className="absolute inset-x-0 top-9 text-center text-xs tracking-[0.35em] text-white/95 drop-shadow-sm">
-          WE ARE GETTING MARRIED
+        <p className="absolute inset-x-0 top-14 text-center font-display text-[22px] italic tracking-[0.2em] text-white/95 drop-shadow-sm">
+          We Are Getting Married
         </p>
       </div>
 

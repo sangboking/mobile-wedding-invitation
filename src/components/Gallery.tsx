@@ -76,7 +76,7 @@ export default function Gallery() {
 
   return (
     <section className="flex flex-col items-center gap-6 px-6 py-16">
-      <p className="text-xs tracking-[0.35em] text-point">GALLERY</p>
+      <p className="font-bold text-xs tracking-[0.35em] text-point">GALLERY</p>
 
       {/* 3 x 3 그리드 */}
       <div className="grid w-full grid-cols-3 gap-1.5">

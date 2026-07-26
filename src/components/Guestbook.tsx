@@ -138,7 +138,7 @@ export default function Guestbook() {
   return (
     <section className="flex flex-col gap-6 px-6 py-16">
       <div className="flex flex-col items-center gap-2 text-center">
-        <p className="text-xs tracking-[0.35em] text-point">GUESTBOOK</p>
+        <p className="font-bold text-xs tracking-[0.35em] text-point">GUESTBOOK</p>
         <h2 className="text-lg font-medium text-ink">방명록</h2>
         <p className="text-sm leading-relaxed text-ink/70">
           따뜻한 축하의 한마디를 남겨주세요.

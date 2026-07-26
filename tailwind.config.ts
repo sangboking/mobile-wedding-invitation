@@ -15,7 +15,8 @@ const config: Config = {
         point: "#B79E84",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+        display: ["var(--font-display)", "serif"],
       },
     },
   },

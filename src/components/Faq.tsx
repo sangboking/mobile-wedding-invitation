@@ -37,7 +37,7 @@ export default function Faq() {
   return (
     <section className="flex flex-col gap-6 px-6 py-16">
       <div className="flex flex-col items-center gap-2 text-center">
-        <p className="text-xs tracking-[0.35em] text-point">FAQ</p>
+        <p className="font-bold text-xs tracking-[0.35em] text-point">FAQ</p>
         <h2 className="text-lg font-medium text-ink">자주 묻는 질문</h2>
       </div>
 

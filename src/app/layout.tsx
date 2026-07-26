@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Serif_KR } from "next/font/google";
+import { Noto_Sans_KR, Playfair_Display } from "next/font/google";
 import { wedding } from "@/config/wedding";
 import "./globals.css";
 
-const notoSerif = Noto_Serif_KR({
+const notoSans = Noto_Sans_KR({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-serif",
+  variable: "--font-sans",
+  display: "swap",
+});
+
+// 영문 디스플레이용 (예: "WE ARE GETTING MARRIED")
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -46,7 +54,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSerif.variable} font-serif`}>
+      <body className={`${notoSans.variable} ${playfair.variable} font-sans`}>
         <div className="invite-shell">{children}</div>
       </body>
     </html>

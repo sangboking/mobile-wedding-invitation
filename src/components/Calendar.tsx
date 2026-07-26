@@ -27,9 +27,9 @@ export default function Calendar() {
 
   return (
     <section className="flex flex-col items-center gap-6 px-8 py-16">
-      <p className="text-xs tracking-[0.35em] text-point">CALENDAR</p>
+      <p className="font-bold text-xs tracking-[0.35em] text-point">CALENDAR</p>
 
-      <h2 className="text-lg tracking-[0.2em] text-ink">{monthName}</h2>
+      <h2 className="text-lg font-medium tracking-[0.2em] text-ink">{monthName}</h2>
 
       <div className="w-full max-w-[320px]">
         {/* 요일 헤더 */}

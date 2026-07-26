@@ -58,7 +58,7 @@ export default function Invitation() {
 
   return (
     <section className="flex flex-col items-center gap-8 px-8 py-16 text-center">
-      <p className="text-xs tracking-[0.35em] text-point">INVITATION</p>
+      <p className="font-bold text-xs tracking-[0.35em] text-point">INVITATION</p>
 
       {greeting.poem && (
         <p className="break-keep text-[15px] leading-loose text-ink/80">

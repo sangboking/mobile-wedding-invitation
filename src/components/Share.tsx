@@ -38,7 +38,7 @@ export default function Share() {
 
   return (
     <section className="flex flex-col items-center gap-5 px-6 py-16">
-      <p className="text-xs tracking-[0.35em] text-point">SHARE</p>
+      <p className="font-bold text-xs tracking-[0.35em] text-point">SHARE</p>
       <p className="text-center text-sm leading-relaxed text-ink/70">
         소중한 분들께 청첩장을 전해주세요.
       </p>
