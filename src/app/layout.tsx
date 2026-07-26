@@ -20,7 +20,7 @@ const playfair = Playfair_Display({
 
 const { groom, bride, meta } = wedding;
 const title = `${groom.name} ♥ ${bride.name} 결혼합니다`;
-const description = "저희 두 사람의 결혼식에 초대합니다.";
+const description = "09월 05일 토요일 오후 5시 20분";
 
 export const metadata: Metadata = {
   metadataBase: new URL(meta.siteUrl),
